@@ -5,8 +5,21 @@ You will have to find the following information and test them as you go along in
 ## Level 1
 
 - Which are the different primitive data types in TypeScript?
+
+In TypeScript, there is seven primitive types : **bigint**, **boolean**, **null**, **number**, **string**, **nsymbol**, **undefined**.
+
 - How to type an Array?
+
+You can type an Array by declaring a name followed by brackets, you can add or not some values in there and at the end a semi-colon.
+
+`const nameOfTheApprentices = ['Kriss', 'Virand', 'Idriss', 'Audrey', 'Manue', 'Martin', 'Elo', 'Davy', 'Xavier', 'Pouki'];`
+
 - What is the `any` type?
+
+The `any` type is when you don't assign a type to your value. You can do it when you don't know the type that will return to you. Here is an example :
+
+`let myKnowledge; // the type here is any because we don't assign one particular type`
+
 - How to type the return of a function as well as the type of its parameters?
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
