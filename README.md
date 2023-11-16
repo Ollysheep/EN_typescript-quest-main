@@ -12,13 +12,21 @@ In TypeScript, there is seven primitive types : **bigint**, **boolean**, **null*
 
 You can type an Array by declaring a name followed by brackets, you can add or not some values in there and at the end a semi-colon.
 
-`const nameOfTheApprentices = ['Kriss', 'Virand', 'Idriss', 'Audrey', 'Manue', 'Martin', 'Elo', 'Davy', 'Xavier', 'Pouki'];`
+```ts
+const nameOfTheApprentices = ['Kriss', 'Virand', 'Idriss', 'Audrey', 'Manue', 'Martin', 'Elo', 'Davy', 'Xavier', 'Pouki'];`
+```
 
 - What is the `any` type?
 
 The `any` type is when you don't assign a type to your value. You can do it when you don't know the type that will return to you. Here is an example :
 
-`let myKnowledge; // the type here is any because we don't assign one particular type`
+```ts
+let myKnowledge; // the type here is any because we don't assign one particular type
+
+myKnowledge = true; // this is valid
+myKnowledge = "is abundant"; // this is valid (Well not necessarily true...)
+myKnowledge = 42; // this is valid
+```
 
 - How to type the return of a function as well as the type of its parameters?
 
