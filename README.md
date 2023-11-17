@@ -130,16 +130,17 @@ class Calculator {
 const myCalculator = new Calculator();
 
 // Using the methods of the Calculator class
-const sum = myCalculator.add(5, 3); // Using the add method
+let sum = myCalculator.add(5, 3); // Using the add method
 console.log("Sum:", sum); // Output: Sum: 8
 
-const difference = myCalculator.subtract(10, 4); // Using the subtract method
+let difference = myCalculator.subtract(10, 4); // Using the subtract method
 console.log("Difference:", difference); // Output: Difference: 6
 ```
 
 - What is the visibility of properties?
 
-In TypeScript, by default, all properties and methods within classes are considered "public", but , TypeScript also supports two other member visibilities apart from public: "private" and "protected." These different visibilities control how properties and methods can be accessed within the class and its subclasses:
+In TypeScript, by default, all properties and methods within classes are considered "public", but , TypeScript also supports two other member visibilities apart from public: "private" and "protected."
+These different visibilities control how properties and methods can be accessed within the class or subclasses.
 By explicitly specifying member visibility (public, private, or protected), developers can control and restrict access to properties and methods within their classes, enabling better encapsulation and control over how class members are used and accessed.
 
 - What is the difference between `public`, `private` and `protected`?
@@ -155,11 +156,70 @@ By explicitly specifying member visibility (public, private, or protected), deve
 ## Level 3
 
 - How to split our program into different files? (e.g. a class in a file that I import into another)
+
+You can split your program with the `export` / `import` method. Let's say you have a main file main.ts and an additional functions.ts file that you want to import into main.ts.
+
+```ts
+// functions.ts
+export function add(a: number, b: number): number {
+  // Export the functions from the functions.ts file
+  return a + b;
+}
+
+export function subtract(a: number, b: number): number {
+  return a - b;
+}
+```
+
+```ts
+// main.ts
+import { add, subtract } from "./functions"; // Import the functions from the functions.ts file by following the way to acces of this file
+
+const result1 = add(5, 3);
+console.log("Result :", result1);
+
+const result2 = subtract(10, 4);
+console.log("Result :", result2);
+```
+
 - What is the `export` keyword?
+
+The `export` keyword allow you to export the code that you will need in an other file.
+
 - What is the `import` keyword?
+
+The `export` keyword allow you to import the code that you previously export and inject it on the file that you want by following the way to acces the file that you want to be exported.
+
 - What's inheritance?
+
+In TypeScript, one class can inherit the properties and methods of another class, a concept known as inheritance.
+The class that inherits these properties and methods is referred to as the child class, while the class whose properties and methods are inherited is termed the parent class. This terminology draws parallels from the biological context where children inherit genetic traits from their parents.
+Through inheritance, you can leverage the functionality of an already existing class without the need to rewrite it. This enables reusability of code and facilitates building upon existing functionalities in a more efficient manner. To inherit a class, you use the `extends` keyword.
+
+In this example, the Novels is a child class and the Books is the parent class :
+
+```ts
+class Books {
+  constructor(private author: string, language: string) {
+    this.author = author;
+    this.language = language;
+  }
+  getNameAndLanguage(): string {
+    return `The author is ${this.author} and it was written in ${this.language}.`;
+  }
+}
+
+class Novels extends Books {}
+```
+
 - How to call the constructor of a parent class?
+
+As the `Books` class includes a constructor responsible for initializing the `author` and `language` properties, it's necessary to initialize these properties within the constructor of the `Novels` class by invoking the constructor of its parent class.
+
+In order to invoke the parent class's constructor within the constructor of the child class, you utilize the `super()` syntax. For instance:
+
 - How to call a method of a parent class?
+
 - What is polymorphism?
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
