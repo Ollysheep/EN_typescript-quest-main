@@ -49,7 +49,7 @@ myKnowledge = 42; // this is valid
 To type the return of a function and its parameters in TypeScript, you habe to put the parameters into a pair of parentheses, then a colon after that you have to indicate the return type. Then you have to add types to each of the parameters and then to the function itself to add a return type. If your function is declared without a specified return data type statement, then an undefined is returned. When you define a function, you can explicitly indicate the type of value it should return right after the parameter list.
 
 ```ts
-function logAgeAndName(age: number, name = String) {
+function logAgeAndName(age: number, name: string) {
   console.log(`${name}, age ${age}`);
 }
 
@@ -322,6 +322,8 @@ animal.makeSound(); // Output: Woof! Woof!
 animal = new Cat();
 animal.makeSound(); // Output: Meow!
 ```
+
+Inheritance and polymorphism are fundamental concepts in object-oriented programming that play significant roles in code reusability, maintaining a clear class hierarchy, and fostering flexibility and extensibility in software development.
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
 
