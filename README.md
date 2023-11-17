@@ -293,34 +293,34 @@ console.log(novel.getDetails()); // Output: The author is Stephen King and it wa
 - What is polymorphism?
 
 Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to be used for entities of different types.
-In this example, Animal is the superclass with a method makeSound(). Both Dog and Cat classes override the makeSound() method inherited from Animal. Depending on the actual object type (Dog or Cat), the appropriate makeSound() method is called at runtime when animal.makeSound() is invoked :
+In this example, Vehicle is the superclass with a method vehicle.drive(). Both Dog and Cat classes override the vehicle.drive() method inherited from Vehicle. Depending on the actual object type (Car or Bike), the appropriate vehicle.drive() method is called at runtime when vehicle.drive() is invoked :
 
 ```ts
-class Animal {
-  makeSound(): void {
-    console.log("Some generic sound");
+class Vehicle {
+  drive(): void {
+    console.log("Generic driving method for vehicles.");
   }
 }
 
-class Dog extends Animal {
-  makeSound(): void {
-    console.log("Woof! Woof!");
+class Car extends Vehicle {
+  drive(): void {
+    console.log("Driving a car...");
   }
 }
 
-class Cat extends Animal {
-  makeSound(): void {
-    console.log("Meow!");
+class Bike extends Vehicle {
+  drive(): void {
+    console.log("Riding a bike...");
   }
 }
 
-let animal: Animal;
+let vehicle: Vehicle;
 
-animal = new Dog();
-animal.makeSound(); // Output: Woof! Woof!
+vehicle = new Car();
+vehicle.drive(); // Output: Driving a car...
 
-animal = new Cat();
-animal.makeSound(); // Output: Meow!
+vehicle = new Bike();
+vehicle.drive(); // Output: Riding a bike...
 ```
 
 Inheritance and polymorphism are fundamental concepts in object-oriented programming that play significant roles in code reusability, maintaining a clear class hierarchy, and fostering flexibility and extensibility in software development.
