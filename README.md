@@ -8,12 +8,28 @@ You will have to find the following information and test them as you go along in
 
 In TypeScript, there is seven primitive types : **bigint**, **boolean**, **null**, **number**, **string**, **nsymbol**, **undefined**.
 
+```ts
+let myName: string = "Kristina";
+let myAge: number = 25;
+let amIaWoman: boolean = true;
+```
+
 - How to type an Array?
 
-You can type an Array by declaring a name followed by brackets, you can add or not some values in there and at the end a semi-colon.
+You can type an Array by declaring a name followed by square brackets, you can add or not some values in there and at the end a semi-colon.
 
 ```ts
-const nameOfTheApprentices = ['Kriss', 'Virand', 'Idriss', 'Audrey', 'Manue', 'Martin', 'Elo', 'Davy', 'Xavier', 'Pouki'];`
+let nameOfTheApprentices = [
+  'Kriss',
+  'Virand',
+  'Idriss',
+  'Audrey',
+  'Manue',
+  'Martin',
+  'Elo',
+  'Davy',
+  'Xavier',
+  'Pouki'];`
 ```
 
 - What is the `any` type?
@@ -33,12 +49,13 @@ myKnowledge = 42; // this is valid
 To type the return of a function and its parameters in TypeScript, you habe to put the parameters into a pair of parentheses, then a colon after that you have to indicate the return type. Then you have to add types to each of the parameters and then to the function itself to add a return type. If your function is declared without a specified return data type statement, then an undefined is returned. When you define a function, you can explicitly indicate the type of value it should return right after the parameter list.
 
 ```ts
-function concatStrings(str1: string = "Hello", str2: string = "World"): string {
-  return str1 + str2;
+function logAgeAndName(age: number, name = String) {
+  console.log(`${name}, age ${age}`);
 }
 
-const firstString = "Bonjour, "; // This is valid
-const secondString = 123; // This is invalid
+logAgeAndName(25, "Kristina"); // This is valid 25 is a number and 'Kristina' a string
+
+logAgeAndName("Kristina", 25); // This is invalid because argument of type 'string' is not assignable to parameter of type 'number'
 ```
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
@@ -46,13 +63,92 @@ const secondString = 123; // This is invalid
 ## Level 2
 
 - What is a class?
+
+A class permit to contain data for the object.
+
+```ts
+class Books {
+  author: string;
+  release: boolean;
+  pages: number;
+}
+```
+
 - What is a class constructor?
+
+A class constructor is a special member function of a class that is executed whenever a new object of that class is created. It has the same name as the class and does not have any return type.
+
+```ts
+class Books {
+  author: string;
+  pages: number;
+  constructor(author: string, pages: number) {
+    this.author = author;
+    this.pages = pages;
+  }
+}
+
+const myBook = new Books("Shinning", 571);
+```
+
 - What is a class instance?
+
+A class instance is a specific object created from a class, following the guidelines set by that class. It has its own unique data and behaviors based on the class blueprint. Here it's `myBook`.
+
 - How to check that a class is of a certain instance?
+
+The `instanceof` operator allows to check whether an object belongs to a certain class.
+
+```ts
+class Books {}
+let myBook = new Books();
+
+// is it an object of Books class?
+alert(myBook instanceof Books); // true
+```
+
 - What is `this` in a class?
+
+when we assign `this.author = author` inside the constructor, we are creating a public property that’s available throughout the class.
+
 - What is a class method?
+
+A class method is a method that is bound to the class and not the object of the class.
+
+```ts
+class Calculator {
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  subtract(a: number, b: number): number {
+    return a - b;
+  }
+}
+
+// Creating an instance of the Calculator class
+const myCalculator = new Calculator();
+
+// Using the methods of the Calculator class
+const sum = myCalculator.add(5, 3); // Using the add method
+console.log("Sum:", sum); // Output: Sum: 8
+
+const difference = myCalculator.subtract(10, 4); // Using the subtract method
+console.log("Difference:", difference); // Output: Difference: 6
+```
+
 - What is the visibility of properties?
+
+In TypeScript, by default, all properties and methods within classes are considered "public", but , TypeScript also supports two other member visibilities apart from public: "private" and "protected." These different visibilities control how properties and methods can be accessed within the class and its subclasses:
+By explicitly specifying member visibility (public, private, or protected), developers can control and restrict access to properties and methods within their classes, enabling better encapsulation and control over how class members are used and accessed.
+
 - What is the difference between `public`, `private` and `protected`?
+
+**Public**: This is the default visibility in TypeScript. Public members can be accessed from anywhere, both inside and outside of the class.
+
+**Private**: Private members are accessible only within the class where they are declared. They cannot be accessed from outside the defining class, not even in its subclasses.
+
+**Protected**: Protected members are similar to private members, but they can be accessed within the defining class and its subclasses. They are not accessible from outside the class hierarchy.
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
 
