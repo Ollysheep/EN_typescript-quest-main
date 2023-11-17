@@ -64,7 +64,7 @@ logAgeAndName("Kristina", 25); // This is invalid because argument of type 'stri
 
 - What is a class?
 
-A class permit to contain data for the object.
+A class permit to contain data for the object. It's like a blueprint for a house. You can't use it like that but you need it to build your house and live here.
 
 ```ts
 class Books {
@@ -218,9 +218,110 @@ As the `Books` class includes a constructor responsible for initializing the `au
 
 In order to invoke the parent class's constructor within the constructor of the child class, you utilize the `super()` syntax. For instance:
 
+```ts
+class Books {
+  private author: string;
+  private language: string;
+
+  constructor(author: string, language: string) {
+    this.author = author;
+    this.language = language;
+  }
+
+  getNameAndLanguage(): string {
+    return `The author is ${this.author} and it was written in ${this.language}.`;
+  }
+}
+
+class Novels extends Books {
+  private genre: string;
+
+  constructor(author: string, language: string, genre: string) {
+    super(author, language); // Calling parent class constructor
+    this.genre = genre;
+  }
+
+  getGenre(): string {
+    return `The genre of this novel is ${this.genre}.`;
+  }
+}
+```
+
 - How to call a method of a parent class?
 
+In TypeScript, to call a method of the parent class from a method within the child class, you can use the super keyword followed by the method name to access the parent class's method.
+
+```ts
+class Books {
+  private author: string;
+  private language: string;
+
+  constructor(author: string, language: string) {
+    this.author = author;
+    this.language = language;
+  }
+
+  getNameAndLanguage(): string {
+    return `The author is ${this.author} and it was written in ${this.language}.`;
+  }
+}
+
+class Novels extends Books {
+  private genre: string;
+
+  constructor(author: string, language: string, genre: string) {
+    super(author, language); // Calling parent class constructor
+    this.genre = genre;
+  }
+
+  getGenre(): string {
+    return `The genre of this novel is ${this.genre}.`;
+  }
+
+  getDetails(): string {
+    // Calling the method from the parent class
+    const parentDetails = super.getNameAndLanguage();
+    return `${parentDetails} ${this.getGenre()}`;
+  }
+}
+
+// Usage:
+const novel = new Novels("Stephen King", "English", "Horror");
+console.log(novel.getDetails()); // Output: The author is Stephen King and it was written in English. The genre of this novel is Horror.
+```
+
 - What is polymorphism?
+
+Polymorphism is a fundamental concept in object-oriented programming (OOP) that allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to be used for entities of different types.
+In this example, Animal is the superclass with a method makeSound(). Both Dog and Cat classes override the makeSound() method inherited from Animal. Depending on the actual object type (Dog or Cat), the appropriate makeSound() method is called at runtime when animal.makeSound() is invoked :
+
+```ts
+class Animal {
+  makeSound(): void {
+    console.log("Some generic sound");
+  }
+}
+
+class Dog extends Animal {
+  makeSound(): void {
+    console.log("Woof! Woof!");
+  }
+}
+
+class Cat extends Animal {
+  makeSound(): void {
+    console.log("Meow!");
+  }
+}
+
+let animal: Animal;
+
+animal = new Dog();
+animal.makeSound(); // Output: Woof! Woof!
+
+animal = new Cat();
+animal.makeSound(); // Output: Meow!
+```
 
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
 
