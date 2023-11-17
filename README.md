@@ -30,6 +30,17 @@ myKnowledge = 42; // this is valid
 
 - How to type the return of a function as well as the type of its parameters?
 
+To type the return of a function and its parameters in TypeScript, you habe to put the parameters into a pair of parentheses, then a colon after that you have to indicate the return type. Then you have to add types to each of the parameters and then to the function itself to add a return type. If your function is declared without a specified return data type statement, then an undefined is returned. When you define a function, you can explicitly indicate the type of value it should return right after the parameter list.
+
+```ts
+function concatStrings(str1: string = "Hello", str2: string = "World"): string {
+  return str1 + str2;
+}
+
+const firstString = "Bonjour, "; // This is valid
+const secondString = 123; // This is invalid
+```
+
 **🎉🎉🎉Update the Github Project board🎉🎉🎉**
 
 ## Level 2
