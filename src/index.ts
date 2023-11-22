@@ -80,20 +80,36 @@ while (aliveCount > 1) {
   aliveCount = heroes.filter((hero) => hero.isAlive()).length;
 }
 
-console.log("----------------------");
 console.log("Status after Battle Two Final One:");
 console.log(
   `${axeHero.getName()} life: ${axeHero.getLife()}, ${swordHero.getName()} life: ${swordHero.getLife()}, ${spearHero.getName()} life: ${spearHero.getLife()}`
 );
 
 // Determine the result
-const aliveHeroes = heroes.filter((hero) => hero.isAlive());
+const aliveHeroes = heroes.filter((hero) => hero.isAlive()); // Get the list of alive heroes (in a new array who take filtered elements by filter() )
 
-if (aliveHeroes.length === 1) {
-  const winner = aliveHeroes[0];
-  console.log("----------------------");
+let maxLife = 0;
+let potentialWinners: Hero[] = []; // Initialize array to store potential winners
+
+// Iterate through alive heroes to find potential winners with the highest life points
+aliveHeroes.forEach((hero) => {
+  const heroLife = hero.getLife();
+  if (heroLife > maxLife) {
+    maxLife = heroLife;
+    potentialWinners = [hero];
+  } else if (heroLife === maxLife) {
+    potentialWinners.push(hero);
+  }
+});
+
+if (potentialWinners.length === 1) {
+  const winner = potentialWinners[0];
   console.log(`${winner.getName()} is the winner.`);
+} else if (potentialWinners.length > 1) {
+  console.log("It's a draw between the following heroes:");
+  potentialWinners.forEach((winner) => {
+    console.log(`${winner.getName()} with life ${maxLife}`);
+  });
 } else {
-  console.log("----------------------");
-  console.log("It's a draw.");
+  console.log("No winner; all heroes are defeated.");
 }
