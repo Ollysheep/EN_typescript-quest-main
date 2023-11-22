@@ -1,8 +1,10 @@
 class Weapon {
   name: string;
+  damage: number; // Adding damage property to Weapon class
 
-  constructor(name: string) {
+  constructor(name: string, damage: number) {
     this.name = name;
+    this.damage = damage;
   }
 }
 
@@ -10,12 +12,13 @@ class Hero {
   private heroName: string; // Private properties to encapsulate data
   private heroPower: number;
   private heroLife: number;
-  weapon!: Weapon; // Add weapon attribute (initialized later)
+  weapon?: Weapon; // Add weapon attribute (initialized later)
 
-  constructor(name: string, power: number, life: number) {
+  constructor(name: string, power: number, life: number, weapon?: Weapon) {
     this.heroName = name;
     this.heroPower = power;
     this.heroLife = life;
+    this.weapon = weapon;
   }
 
   // Getter and setter methods to access and modify private properties
@@ -44,9 +47,15 @@ class Hero {
   }
 
   attack(opponent: Hero): void {
+    if (!this.weapon) {
+      console.log(`${this.getName()} has no weapon!`);
+      return;
+    }
+
+    const totalDamage = this.getPower() + this.weapon.damage; // Calculate total damage
     console.log(`${this.getName()} attacks ${opponent.getName()}.`);
-    opponent.takeDamage(this.heroPower);
-    console.log(`${opponent.getName()} took ${this.heroPower} damage.`);
+    opponent.takeDamage(totalDamage);
+    console.log(`${opponent.getName()} took ${totalDamage} damage.`);
   }
 
   takeDamage(damage: number): void {
@@ -94,51 +103,75 @@ console.log("----------------------");
 
 // HeroAxe, HeroSword, HeroSpear inherit from Hero class and implement specialized attacks based on opponent types
 class HeroAxe extends Hero {
-  constructor(name: string, power: number, life: number) {
-    super(name, power, life);
-    this.weapon = new Weapon("axe");
+  constructor(name: string, power: number, life: number, weapon?: Weapon) {
+    super(name, power, life, weapon);
   }
 
   attack(opponent: Hero): void {
     if (opponent instanceof HeroSword) {
       this.setPower(this.getPower() * 2);
     }
-    super.attack(opponent);
+    if (this.weapon) {
+      const totalDamage = this.getPower() + this.weapon.damage;
+      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
+      opponent.takeDamage(totalDamage);
+      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
+    } else {
+      console.log(`${this.getName()} has no weapon!`);
+    }
+
+    super.attack(opponent); // Call the attack method of the base class (Hero)
   }
 }
 
 class HeroSword extends Hero {
-  constructor(name: string, power: number, life: number) {
-    super(name, power, life);
-    this.weapon = new Weapon("sword");
+  constructor(name: string, power: number, life: number, weapon?: Weapon) {
+    super(name, power, life, weapon);
   }
 
   attack(opponent: Hero): void {
     if (opponent instanceof HeroSpear) {
       this.setPower(this.getPower() * 2);
     }
+    if (this.weapon) {
+      const totalDamage = this.getPower() + this.weapon.damage;
+      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
+      opponent.takeDamage(totalDamage);
+      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
+    } else {
+      console.log(`${this.getName()} has no weapon!`);
+    }
+
     super.attack(opponent);
   }
 }
 
 class HeroSpear extends Hero {
-  constructor(name: string, power: number, life: number) {
-    super(name, power, life);
-    this.weapon = new Weapon("spear");
+  constructor(name: string, power: number, life: number, weapon?: Weapon) {
+    super(name, power, life, weapon);
   }
 
   attack(opponent: Hero): void {
     if (opponent instanceof HeroAxe) {
       this.setPower(this.getPower() * 2);
     }
+    if (this.weapon) {
+      const totalDamage = this.getPower() + this.weapon.damage;
+      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
+      opponent.takeDamage(totalDamage);
+      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
+    } else {
+      console.log(`${this.getName()} has no weapon!`);
+    }
+
     super.attack(opponent);
   }
 }
 
 // Create instances of the three classes
-const axeHero = new HeroAxe("Pistache", 367, 1425);
-const swordHero = new HeroSword("Maki", 1536, 3872);
-const spearHero = new HeroSpear("Luci", 449, 1212);
+const axeHero = new HeroAxe("Pistache", 367, 1425, new Weapon("axe", 50));
+const swordHero = new HeroSword("Maki", 1536, 3872, new Weapon("sword", 70));
+const spearHero = new HeroSpear("Luci", 449, 1212, new Weapon("spear", 60));
 
 // Test the attack methods
 console.log("Battle Two: Pistache vs. Maki vs. Luci");
