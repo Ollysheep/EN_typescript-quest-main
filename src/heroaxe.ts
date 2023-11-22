@@ -1,4 +1,5 @@
 import { Hero } from "./hero";
+import { HeroSword } from "./herosword";
 import { Weapon } from "./weapon";
 
 export class HeroAxe extends Hero {

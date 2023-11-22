@@ -1,75 +1,8 @@
-class Weapon {
-  name: string;
-  damage: number; // Adding damage property to Weapon class
-
-  constructor(name: string, damage: number) {
-    this.name = name;
-    this.damage = damage;
-  }
-}
-
-class Hero {
-  private heroName: string; // Private properties to encapsulate data
-  private heroPower: number;
-  private heroLife: number;
-  weapon?: Weapon; // Add weapon attribute (initialized later)
-
-  constructor(name: string, power: number, life: number, weapon?: Weapon) {
-    this.heroName = name;
-    this.heroPower = power;
-    this.heroLife = life;
-    this.weapon = weapon;
-  }
-
-  // Getter and setter methods to access and modify private properties
-  getName(): string {
-    return this.heroName;
-  }
-
-  getPower(): number {
-    return this.heroPower;
-  }
-
-  getLife(): number {
-    return this.heroLife;
-  }
-
-  setName(name: string): void {
-    this.heroName = name;
-  }
-
-  setPower(power: number): void {
-    this.heroPower = power;
-  }
-
-  setLife(life: number): void {
-    this.heroLife = life;
-  }
-
-  attack(opponent: Hero): void {
-    if (!this.weapon) {
-      console.log(`${this.getName()} has no weapon!`);
-      return;
-    }
-
-    const totalDamage = this.getPower() + this.weapon.damage; // Calculate total damage
-    console.log(`${this.getName()} attacks ${opponent.getName()}.`);
-    opponent.takeDamage(totalDamage);
-    console.log(`${opponent.getName()} took ${totalDamage} damage.`);
-  }
-
-  takeDamage(damage: number): void {
-    this.heroLife -= damage;
-    if (this.heroLife < 0) {
-      this.heroLife = 0;
-    }
-    console.log(`${this.getName()} took ${damage} damage.`);
-  }
-
-  isAlive(): boolean {
-    return this.heroLife > 0;
-  }
-}
+import { Hero } from "./hero";
+import { HeroAxe } from "./heroaxe";
+import { HeroSword } from "./herosword";
+import { HeroSpear } from "./herospear";
+import { Weapon } from "./weapon";
 
 // Create instances of Hero
 const kriss = new Hero("Kriss", 31, 62);
@@ -100,73 +33,6 @@ console.log(
 console.log(`${kriss.getName()} is alive: ${kriss.isAlive()}`);
 console.log(`${ani.getName()} is alive: ${ani.isAlive()}`);
 console.log("----------------------");
-
-// HeroAxe, HeroSword, HeroSpear inherit from Hero class and implement specialized attacks based on opponent types
-class HeroAxe extends Hero {
-  constructor(name: string, power: number, life: number, weapon?: Weapon) {
-    super(name, power, life, weapon);
-  }
-
-  attack(opponent: Hero): void {
-    if (opponent instanceof HeroSword) {
-      this.setPower(this.getPower() * 2);
-    }
-    if (this.weapon) {
-      const totalDamage = this.getPower() + this.weapon.damage;
-      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
-      opponent.takeDamage(totalDamage);
-      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
-    } else {
-      console.log(`${this.getName()} has no weapon!`);
-    }
-
-    super.attack(opponent); // Call the attack method of the base class (Hero)
-  }
-}
-
-class HeroSword extends Hero {
-  constructor(name: string, power: number, life: number, weapon?: Weapon) {
-    super(name, power, life, weapon);
-  }
-
-  attack(opponent: Hero): void {
-    if (opponent instanceof HeroSpear) {
-      this.setPower(this.getPower() * 2);
-    }
-    if (this.weapon) {
-      const totalDamage = this.getPower() + this.weapon.damage;
-      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
-      opponent.takeDamage(totalDamage);
-      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
-    } else {
-      console.log(`${this.getName()} has no weapon!`);
-    }
-
-    super.attack(opponent);
-  }
-}
-
-class HeroSpear extends Hero {
-  constructor(name: string, power: number, life: number, weapon?: Weapon) {
-    super(name, power, life, weapon);
-  }
-
-  attack(opponent: Hero): void {
-    if (opponent instanceof HeroAxe) {
-      this.setPower(this.getPower() * 2);
-    }
-    if (this.weapon) {
-      const totalDamage = this.getPower() + this.weapon.damage;
-      console.log(`${this.getName()} attacks ${opponent.getName()}.`);
-      opponent.takeDamage(totalDamage);
-      console.log(`${opponent.getName()} took ${totalDamage} damage.`);
-    } else {
-      console.log(`${this.getName()} has no weapon!`);
-    }
-
-    super.attack(opponent);
-  }
-}
 
 // Create instances of the three classes
 const axeHero = new HeroAxe("Pistache", 367, 1425, new Weapon("axe", 50));
