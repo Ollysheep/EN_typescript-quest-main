@@ -4,13 +4,12 @@ export class Hero {
   private heroName: string; // Private properties to encapsulate data
   private heroPower: number;
   private heroLife: number;
-  weapon?: Weapon; // Add weapon attribute (initialized later)
+  weapon!: Weapon; // Add weapon attribute (initialized later)
 
-  constructor(name: string, power: number, life: number, weapon?: Weapon) {
+  constructor(name: string, power: number, life: number) {
     this.heroName = name;
     this.heroPower = power;
     this.heroLife = life;
-    this.weapon = weapon;
   }
 
   // Getter and setter methods to access and modify private properties
